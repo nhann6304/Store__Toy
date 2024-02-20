@@ -1,3 +1,24 @@
+<?php
+// Phân trang
+?>
+
+<?php
+$ac = 1;
+if (isset($_GET['action'])) {
+    if (isset($_GET['act']) && $_GET['act'] == 'productAll') {
+        $ac = 2;
+    } else if (isset($_GET['act']) && $_GET['act'] == 'productNew') {
+        $ac = 3;
+    } else if (isset($_GET['act']) && $_GET['act'] == 'productSale') {
+        $ac = 4;
+    } else {
+        $ac = 1;
+    }
+}
+?>
+
+
+
 <div class="app__container">
     <div class="grid">
         <div class="grid__row">
@@ -17,7 +38,7 @@
                             ?>
                             <!-- Có mủi tên màu đỏ khi danh mục đó đang được chọn sài class category-item--active -->
                             <li class="category-item " data-tab="<?php echo $set['iploai'] ?> ">
-                                <a href="index.php?id=<?php echo $idLoai; ?>" class="category-item__link">
+                                <a href="index.php?action=hanghoa&id=<?php echo $idLoai; ?>" class="category-item__link">
                                     <?php echo $set['tenloai'] ?>
                                 </a>
                             </li>
@@ -35,9 +56,9 @@
                 <div class="home-filter">
                     <!-- khi bấm tới trang nào trang hướng đên sài class  btn btn--primary để tô màu đỏ lên -->
                     <span class="home-filter__label">Sắp xếp theo</span>
-                    <button class="home-filter__btn btn">Phổ Biến</button>
-                    <button class="home-filter__btn btn btn--primary">Mới nhất</button>
-                    <button class="home-filter__btn btn">Bán chạy</button>
+                    <button id="discountBtnAll" class="home-filter__btn btn">Tất cả</button>
+                    <button id="filterNewest" class="home-filter__btn btn">Mới nhất</button>
+                    <button id="filterDiscount" class="home-filter__btn btn">Giảm giá</button>
 
                     <div class="select-input">
                         <span class="select-input__label">Giá</span>
@@ -77,107 +98,118 @@
                         <?php
 
                         $hh = new hanghoa();
-                        $result = $hh->getHanghoa($id);
+                        if ($ac == 1) {
+                            $result = $hh->getHanghoa($id);
+                        } else if ($ac == 3) {
+                            $result = $hh->getHangHoaNew();
+                        } else if ($ac == 4) {
+                            $result = $hh->getHangHoaSale();
+                        } else {
+                            $result = $hh->getHangHoaAll();
+                        }
+                        // $result = $hh->getHangHoaSale();
+                        
                         while ($set = $result->fetch()):
                             ?>
                             <div class="grid__column-2-4 tab-content <?php echo $set['iploai'] ?>">
-                                <a href="#" class="home-product-item">
-                                    <div class="home-product-item__img"
-                                        style="background-image: url('https://u6wdnj9wggobj.vcdn.cloud/media/catalog/product/cache/95cb36d3254e0a20b33361b06e7c0ce9/3/1/31150_1_.jpg');">
-                                    </div>
-                                    <h1 class="home-product-item__name">
-                                        <?php echo $set['tenhh'] ?>
-                                    </h1>
-
-                                    <div class="home-product-item__price">
-                                        <?php if ($set['giamgia'] == 0): ?>
-                                            <span class="home-product-item__price-current">
-                                                <?php echo number_format($set['dongia']); ?> VNĐ
-                                            </span>
-                                        <?php else: ?>
-                                            <span class="home-product-item__price-old">
-                                                <?php echo number_format($set['dongia']); ?> VNĐ
-                                            </span>
-                                            <span class="home-product-item__price-current">
-                                                <?php echo number_format($set['dongia'] - $set['giamgia']) ?> VNĐ
-                                            </span>
-                                        <?php endif; ?>
-
-                                    </div>
-                                    <div class="home-product-item__action">
-                                        <!-- khi đã tim thì tô màu trái tim lên sài class home-product-item__like--liked -->
-                                        <span class="home-product-item__like home-product-item__like--liked">
-                                            <i class="home-product-item__like-icon-empty fa-regular fa-heart"></i>
-                                            <i class="home-product-item__like-icon-fill fa-solid fa-heart"></i>
-                                        </span>
-                                        <div class="home-product-item__rating">
-                                            <i class="home-product-item__gold fa-solid fa-star"></i>
-                                            <i class="home-product-item__gold fa-solid fa-star"></i>
-                                            <i class="home-product-item__gold fa-solid fa-star"></i>
-                                            <i class="home-product-item__gold fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
+                                <a href="index.php?action=hanghoa&act=sanphamchitiet&id=<?php echo $set['mahh']; ?>"
+                                    class="home-product-item">
+                                    <div class="text">
+                                        <div class="home-product-item__img"
+                                            style="background-image: url('./assets/img/<?php echo $set['hinh']; ?>')">
                                         </div>
-                                        <span class="home-product-item__sold">Còn lại
-                                            <?php echo $set['soluongton'] ?>
-                                        </span>
-                                    </div>
-                                    <div class="home-product-item__origin">
-                                        <span class="home-product-item__brand">Sản xuất tại:</span>
-                                        <span class="home-product-item__origin-name">
-                                            <?php echo $set['tenquocgia'] ?>
-                                        </span>
-                                    </div>
-                                    <div class="home-product-item__favourite">
-                                        <i class="fa-solid fa-check"></i>
-                                        <span>Yêu thích</span>
-                                    </div>
+                                        <h1 class="home-product-item__name">
+                                            <?php echo $set['tenhh'] ?>
+                                        </h1>
 
-                                    <div class="home-product-item__sale-off">
-                                        <span class="home-product-item__sale-off-precent">
-                                            <?php echo $set['percent'] ?>%
-                                        </span>
-                                        <span class="home-product-item__sale-off-label">GIẢM</span>
-                                    </div>
+                                        <div class="home-product-item__price">
+                                            <?php if ($set['giamgia'] == 0): ?>
+                                                <span class="home-product-item__price-current">
+                                                    <?php echo number_format($set['dongia']); ?> VNĐ
+                                                </span>
+                                            <?php else: ?>
+                                                <span class="home-product-item__price-old">
+                                                    <?php echo number_format($set['dongia']); ?> VNĐ
+                                                </span>
+                                                <span class="home-product-item__price-current">
+                                                    <?php echo number_format($set['dongia'] - $set['giamgia']) ?> VNĐ
+                                                </span>
+                                            <?php endif; ?>
+                                        </div>
+                                        <div class="home-product-item__action">
+                                            <!-- khi đã tim thì tô màu trái tim lên sài class home-product-item__like--liked -->
+                                            <span class="home-product-item__like home-product-item__like--liked">
+                                                <i class="home-product-item__like-icon-empty fa-regular fa-heart"></i>
+                                                <i class="home-product-item__like-icon-fill fa-solid fa-heart"></i>
+                                            </span>
+                                            <div class="home-product-item__rating">
+                                                <i class="home-product-item__gold fa-solid fa-star"></i>
+                                                <i class="home-product-item__gold fa-solid fa-star"></i>
+                                                <i class="home-product-item__gold fa-solid fa-star"></i>
+                                                <i class="home-product-item__gold fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star"></i>
+                                            </div>
+                                            <span class="home-product-item__sold">Còn lại
+                                                <?php echo $set['soluongton'] ?>
+                                            </span>
+                                        </div>
+                                        <div class="home-product-item__origin">
+                                            <span class="home-product-item__brand">Sản xuất tại:</span>
+                                            <span class="home-product-item__origin-name">
+                                                <?php echo $set['tenquocgia'] ?>
+                                            </span>
+                                        </div>
+                                        <div class="home-product-item__favourite">
+                                            <i class="fa-solid fa-check"></i>
+                                            <span>Yêu thích</span>
+                                        </div>
+
+                                        <div class="home-product-item__sale-off">
+                                            <span class="home-product-item__sale-off-precent">
+                                                <?php echo $set['percent'] ?>%
+                                            </span>
+                                            <span class="home-product-item__sale-off-label">GIẢM</span>
+                                        </div>
                                 </a>
                             </div>
-                        <?php endwhile; ?>
-                    </div>
-
+                        </div>
+                    <?php endwhile; ?>
                 </div>
-
-                <!-- Phân trang pagination -->
-                <ul class="pagination home-product__pagination">
-                    <li href="" class="pagination-item ">
-                        <a href="" class="pagination-item__link">
-                            <i class="pagination-item__icon fa-solid fa-angle-left"></i>
-                        </a>
-                    </li>
-
-                    <li href="" class="pagination-item ">
-                        <a href="" class="pagination-item__link">1</a>
-                    </li>
-                    <li href="" class="pagination-item">
-                        <a href="" class="pagination-item__link">2</a>
-                    </li>
-                    <li href="" class="pagination-item">
-                        <a href="" class="pagination-item__link">3</a>
-                    </li>
-                    <li href="" class="pagination-item">
-                        <a href="" class="pagination-item__link">4</a>
-                    </li>
-                    <li href="" class="pagination-item">
-                        <a href="" class="pagination-item__link">...</a>
-                    </li>
-                    <li href="" class="pagination-item">
-                        <a href="" class="pagination-item__link">10</a>
-                    </li>
-                    <li href="" class="pagination-item">
-                        <a href="" class="pagination-item__link">
-                            <i class="pagination-item__icon fa-solid fa-angle-right"></i>
-                        </a>
-                    </li>
-                </ul>
             </div>
+
+            <!-- Phân trang pagination -->
+            <ul class="pagination home-product__pagination">
+                <li href="" class="pagination-item ">
+                    <a href="" class="pagination-item__link">
+                        <i class="pagination-item__icon fa-solid fa-angle-left"></i>
+                    </a>
+                </li>
+
+                <li href="" class="pagination-item ">
+                    <a href="" class="pagination-item__link">1</a>
+                </li>
+                <li href="" class="pagination-item">
+                    <a href="" class="pagination-item__link">2</a>
+                </li>
+                <li href="" class="pagination-item">
+                    <a href="" class="pagination-item__link">3</a>
+                </li>
+                <li href="" class="pagination-item">
+                    <a href="" class="pagination-item__link">4</a>
+                </li>
+                <li href="" class="pagination-item">
+                    <a href="" class="pagination-item__link">...</a>
+                </li>
+                <li href="" class="pagination-item">
+                    <a href="" class="pagination-item__link">10</a>
+                </li>
+                <li href="" class="pagination-item">
+                    <a href="" class="pagination-item__link">
+                        <i class="pagination-item__icon fa-solid fa-angle-right"></i>
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
+</div>
 </div>

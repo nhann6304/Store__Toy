@@ -24,20 +24,21 @@ switch ($act) {
             $check = $kh->checkUser($name, $email, $phone, $password)->rowCount();
             if ($check >= 1) {
                 echo "trùng";
-
+                echo '<meta http-equiv="refresh" content="0;url=index.php">';
             } else {
                 //insert và database 
                 $iskh = $kh->inserKhachHang($name, $email, $phone, $passnew);
 
                 if ($iskh !== false) {
                     echo '<script> alert("Đăng ký thành công")</script>';
+                    echo '<meta http-equiv="refresh" content="0;url=index.php">';
                 } else {
                     echo '<script> alert("Đăng ký không thành công")</script>';
                     // include_once "./View/registration.php";
-                    echo '<meta http-equiv="refresh" content="0;url=index.php?action=dangky&dangnhap"/>';
+                    echo '<meta http-equiv="refresh" content="0;url=index.php">';
+
                 }
             }
-
         }
         break;
 }

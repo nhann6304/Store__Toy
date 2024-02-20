@@ -270,3 +270,81 @@ p {
 
 
 .pagination-item__icon {}
+
+
+
+
+
+/* banner header */
+
+.slideshow-container {
+    max-width: 1360px;
+    max-height: 530px;
+    position: relative;
+    margin: 25px auto auto auto;
+}
+
+.slide {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+}
+
+.prev,
+.next {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 38px;
+    /* Độ rộng của nút */
+    height: 38px;
+    /* Chiều cao của nút */
+    line-height: 25px;
+    /* Để canh giữa văn bản trong nút */
+    /* text-align: center; */
+    /* Để canh giữa văn bản trong nút */
+    color: red;
+    font-weight: bold;
+    font-size: 25px;
+    transition: 0.6s ease;
+    z-index: 1;
+    border-radius: 50%;
+    /* Để bo tròn thành hình tròn */
+    box-shadow: 0 0 0 3px red;
+    /* Tạo viền đen bao quanh nút */
+}
+
+.prev {
+    left: -60px;
+    /* Đặt nút prev bên trái */
+}
+
+.next {
+    right: -60px;
+    /* Đặt nút next bên phải */
+}
+
+/* CSS cho chấm tròn */
+.dot-container {
+    text-align: center;
+    padding-top: 20px;
+}
+
+.dot {
+    cursor: pointer;
+    height: 10px;
+    width: 10px;
+    margin: 0 5px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.active {
+    background-color: #717171;
+}

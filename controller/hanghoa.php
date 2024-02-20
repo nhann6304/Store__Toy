@@ -1,13 +1,28 @@
 <?php
-
-
-// Kiểm tra xem có giá trị không
-if (isset($idValue)) {
-    // Sử dụng giá trị "id" theo nhu cầu của bạn
-    echo "Giá trị của tham số 'id' là: " . $_SESSION['idhanghoa'];
-} else {
-    echo "Tham số 'id' không tồn tại trong URL.";
+$act = "sanpham";
+if (isset($_GET['act'])) {
+    $act = $_GET['act'];
 }
 
-
+switch ($act) {
+    case "sanpham":
+        include_once "./View/hanghoa.php";
+        break;
+    case "productAll";
+        include_once "./View/hanghoa.php";
+        break;
+    case "productNew";
+        include_once "./View/hanghoa.php";
+        break;
+    case "productSale";
+        include_once "./View/hanghoa.php";
+        break;
+    case "sanphamchitiet";
+        include_once "./View/sanphamchitiet.php";
+        break;
+    case "timkiem":
+        include_once "./View/sanpham.php";
+        break;
+}
+// include_once "./View/sanpham.php"
 ?>

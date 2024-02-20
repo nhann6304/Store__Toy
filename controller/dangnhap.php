@@ -11,7 +11,7 @@ switch ($act) {
         unset($_SESSION['tenkh']);
         echo '<script> alert("Đã đăng xuất")</script>';
 
-        echo '<meta http-equiv="refresh" content="0;url=index.php?action=home"/>';
+        echo '<meta http-equiv="refresh" content="0;url=index.php">';
 
         break;
     case "dangnhap_action":
@@ -29,12 +29,14 @@ switch ($act) {
                 $_SESSION['tenkh'] = $logkh['tenkh'];
                 echo '<script> alert("Đăng nhập thành công")</script>';
                 // include_once "./View/registration.php";
-                echo '<meta http-equiv="refresh" content="0;url=index.php?action=home"/>';
+                echo '<meta http-equiv="refresh" content="0;url=index.php">';
+
             } else {
-                // echo '<script> alert("Đăng nhập không thành công")</script>';
+                echo '<script> alert("Đăng nhập không thành công")</script>';
                 // include_once "./View/registration.php";
                 // echo '<meta http-equiv="refresh" content="0;url=index.php?action=dangky&dangnhap"/>';
-                echo '<meta http-equiv="refresh" content="0;url=index.php?action=home"/>';
+                echo '<meta http-equiv="refresh" content="0;url=index.php">';
+
 
             }
         }

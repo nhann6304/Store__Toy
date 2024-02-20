@@ -17,16 +17,17 @@
                         </div>
 
                         <div class="auth-form__group">
-                            <input name="txtemail" type="text" class="auth-form__input" placeholder="Nhập password">
+                            <input name="txtemail" type="text" class="auth-form__input" placeholder="Nhập email">
                         </div>
 
                         <div class="auth-form__group">
-                            <input name="txtphone" type="text" class="auth-form__input" placeholder="Nhập lại password">
+                            <input name="txtphone" type="text" class="auth-form__input"
+                                placeholder="Nhập số điện thoại">
                         </div>
 
                         <div class="auth-form__group">
                             <input name="txtpassword" type="password" class="auth-form__input"
-                                placeholder="Nhập lại password">
+                                placeholder="Nhập password">
                         </div>
                     </div>
 
@@ -39,7 +40,7 @@
                     </div>
 
                     <div class="auth-form__controls">
-                        <button class="btn auth-form__controls-back btn--normal">TRỞ LẠI</button>
+                        <a href="#" class="btn auth-form__controls-back btn--normal">TRỞ LẠI</a>
                         <button type="submit" name="submit" class="btn btn--primary">ĐĂNG KÝ</button>
                     </div>
                 </div>
@@ -90,7 +91,7 @@
                     </div>
 
                     <div class="auth-form__controls">
-                        <button class="btn auth-form__controls-back btn--normal">TRỞ LẠI</button>
+                        <a class="btn auth-form__controls-back btn--normal">TRỞ LẠI</a>
                         <button class="btn btn--primary">ĐĂNG NHẬP </button>
                     </div>
                 </div>

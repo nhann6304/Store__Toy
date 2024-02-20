@@ -45,11 +45,8 @@ function myModelLoader($className)
         <!-- end headder -->
 
         <!-- start container -->
-        <?php
-        include_once "View/hanghoa.php";
-        ?>
-        <!-- end container -->
 
+        <!-- end container -->
 
         <footer class="footer">
 
@@ -59,7 +56,7 @@ function myModelLoader($className)
             <div class="row">
                 <!-- hien thi noi dung đây -->
                 <?php
-                $ctrl = "home";
+                $ctrl = "banner";
                 if (isset($_GET['action'])) {
                     $ctrl = $_GET['action'];
                 }
@@ -71,7 +68,6 @@ function myModelLoader($className)
 
         <?php
         include_once "View/modal.php";
-
         ?>
 
     </div>
