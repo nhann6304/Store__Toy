@@ -10,7 +10,7 @@ switch ($act) {
         unset($_SESSION['makh']);
         unset($_SESSION['tenkh']);
         echo '<script> alert("Đã đăng xuất")</script>';
-
+        session_destroy();
         echo '<meta http-equiv="refresh" content="0;url=index.php">';
 
         break;

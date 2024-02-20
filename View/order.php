@@ -116,7 +116,6 @@
                             class="display-pay pay-left__information-input-firstname">
                     </div>
 
-
                     <div class="pay-left_information-input">
                         <input type="text" placeholder="Mã bưu chính"
                             class="display-pay pay-left__information-input-lastname">
@@ -141,21 +140,30 @@
         </div>
         <div class="pay__container-box-right">
             <div class="pay__container-checkout">
-                <div class="pay__checkout-info">
-                    <div class="pay__checkout-img"><img
-                            src="https://cdn.shopify.com/s/files/1/0731/6514/4343/files/10b84bf582fee1c11e1bcadff06d1b5c_64x64.jpg?v=1706861551"
-                            alt="Đồ chơi Mặt Nạ Batman BATMAN 6068154"
-                            class="_1h3po424 _1fragemgc _1frageme8 _1fragemiz _1fragemj4 _1fragemje _1fragemj9 _1fragem34 _1fragem2o _1fragem3k _1fragem28 _1fragem50 _1fragem4g _1fragem5k _1fragem3w _1fragemek">
+                <?php
+                $j = 0;
+                $sp = new hoadon();
+                $sp = $hd->selectThongTinHHID($masohd);
+                while ($set = $sp->fetch()):
+                    $j++;
+                    ?>
+
+                    <div class="pay__checkout-info">
+                        <div class="pay__checkout-img">
+                            <img src="./assets/img/<?php echo $set['hinh'] ?>" alt="Đồ chơi Mặt Nạ Batman BATMAN 6068154"
+                                height="64px" width="64px"
+                                class="_1h3po424 _1fragemgc _1frageme8 _1fragemiz _1fragemj4 _1fragemje _1fragemj9 _1fragem34 _1fragem2o _1fragem3k _1fragem28 _1fragem50 _1fragem4g _1fragem5k _1fragem3w _1fragemek">
+                        </div>
+                        <span class="pay__checkout-name">
+                            <?php echo $set['tenhh'] ?>
+                        </span>
+
+                        <span class="pay__checkout-price">
+                            <?php echo number_format($set['dongia']) ?>đ
+
+                        </span>
                     </div>
-                    <span class="pay__checkout-name">
-                        Đồ chơi Mặt Nạ Batman BATMAN 6068154
-                    </span>
-
-                    <span class="pay__checkout-price">
-                        169.000 đ
-                    </span>
-                </div>
-
+                <?php endwhile ?>
                 <div class="pay__checkout-control">
                     <div class="pay__checkout-control-input">
                         <input type="text" placeholder="Mã giảm giá hoặc thẻ quà tặng">
@@ -179,7 +187,11 @@
                     <div class="pay__checkout-sum_all-product">
                         <span class="pay__checkout-sum_all-product-heading">Tổng tiền đơn hàng</span>
                         <span class="pay__checkout-sum-currency">VNĐ</span>
-                        <span class="pay__checkout-sum_all-product-text">169.000d</span>
+                        <span class="pay__checkout-sum_all-product-text">
+                            <?php $gh = new giohang();
+                            echo $gh->getSubTotal();
+                            ?>
+                        </span>
                     </div>
                 </div>
             </div>

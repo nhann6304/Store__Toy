@@ -245,8 +245,16 @@
                                                     <span class="header__cart-item-price">
                                                         <?php echo number_format($item['dongia']); ?>đ
                                                     </span>
-                                                    <span class="header__cart-item-multiply">x</span>
-                                                    <span class="header__cart-item-qnt">2</span>
+                                                    <?php
+                                                    foreach ($_SESSION['cart'] as $key => $item):
+                                                        ?>
+                                                        <span class="header__cart-item-multiply">x</span>
+                                                        <span class="header__cart-item-qnt">
+                                                            <?php echo $item['soluong'] ?>
+                                                        </span>
+                                                        <?php
+                                                    endforeach;
+                                                    ?>
                                                 </div>
                                             </div>
 

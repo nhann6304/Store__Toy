@@ -37,6 +37,14 @@ class hoadon
         $result = $db->__getInstance($select);
         return $result;
     }
+
+    function selectThongTinHHID($masohd)
+    {
+        $db = new connect();
+        $select = "select DISTINCT a.tenhh,b.hinh,b.dongia from hanghoa a, cthanghoa b, cthoadon c WHERE a.mahh=b.idhanghoa and a.mahh=c.mahh and c.sohoadon=$masohd";
+        $result = $db->__getList($select);
+        return $result;
+    }
 }
 
 ?>
