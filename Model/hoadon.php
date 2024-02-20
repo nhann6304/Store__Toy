@@ -28,16 +28,14 @@ class hoadon
         $db = new connect();
         $query = "update hoadon set tongtien=$tongtien  WHERE sohoadon=$masohd and makh=$makh;";
         $db->exec($query);
-
     }
 
     function selectThongTinKhachHangHoaDOn($masohd)
     {
         $db = new connect();
-        $select = "SELECT b.sohoadon, b.ngaydat,a.tenkh  FROM khachhang a  INNER JOIN hoadon b on a.makh=b.makh WHERE masohd=$masohd";
+        $select = "SELECT b.sohoadon, b.ngaydat,a.tenkh,a.sodienthoai,a.email  FROM khachhang a  INNER JOIN hoadon b on a.makh=b.makh WHERE sohoadon=$masohd";
         $result = $db->__getInstance($select);
         return $result;
-
     }
 }
 

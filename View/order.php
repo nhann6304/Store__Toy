@@ -4,7 +4,7 @@
         echo '<meta http-equiv="refresh" content="0;url=index.php?action=dangky&dangnhap"/>';
         ?>
 
-    <?php
+        <?php
     else:
         ?>
         <div class="pay__container-box-left pay__container-box-left-block">
@@ -57,9 +57,20 @@
                     <a class="pay-left__contact-login" href="">Đăng nhập</a>
                 </span>
             </div>
-
+            <?php
+            if (isset($_SESSION['sohoadon'])) {
+                $masohd = $_SESSION['sohoadon'];
+                $hd = new hoadon();
+                $kh = $hd->selectThongTinKhachHangHoaDOn($masohd);
+                $ngay = $kh['ngaydat'];
+                $email = $kh['email'];
+                $sdt = $kh['sodienthoai'];
+                $tenkh = $kh['tenkh'];
+            }
+            ?>
             <div class="pay-left__contact-input">
-                <input type="text" placeholder="Email" class="display-pay pay-left__contact-input-email">
+                <input type="text" placeholder="Email" value="<?php echo $email ?>"
+                    class="display-pay pay-left__contact-input-email">
             </div>
 
             <div class="pay-left__request">
@@ -84,7 +95,8 @@
 
                 <div class="pay-left_fullname">
                     <div class="pay-left_information-input">
-                        <input type="text" placeholder="Tên" class="display-pay pay-left__information-input-firstname">
+                        <input type="text" placeholder="Tên" value="<?php echo $tenkh; ?>"
+                            class="display-pay pay-left__information-input-firstname">
                     </div>
 
 
@@ -94,7 +106,8 @@
                 </div>
 
                 <div class="pay-left_information-input">
-                    <input type="text" placeholder="Địa chỉ" class="display-pay pay-left__information-input-address">
+                    <input type="text" placeholder="Số điện thoại" value="<?php echo $sdt ?>"
+                        class="display-pay pay-left__information-input-address">
                 </div>
 
                 <div class="pay-left_fullname">
