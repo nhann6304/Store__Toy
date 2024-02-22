@@ -65,19 +65,17 @@ if (isset($_GET['id'])) {
                 <?php echo $maloai ?>
             </span>
         </div>
-        <div class="rating">
-            <span class="rating-value">5.0</span>
-            <input type="radio" id="star5" name="rating" value="5">
-            <label for="star5"></label>
-            <input type="radio" id="star4" name="rating" value="4">
-            <label for="star4"></label>
-            <input type="radio" id="star3" name="rating" value="3">
-            <label for="star3"></label>
-            <input type="radio" id="star2" name="rating" value="2">
-            <label for="star2"></label>
-            <input type="radio" id="star1" name="rating" value="1">
-            <label for="star1"></label>
+
+        <div class="rating psstar" data-pid=<?php echo $id ?>>
+            <span class="rating-value">Đánh giá</span>
+
+            <span data-set="$i" class=""></span>
+            <span class="star"></span>
+            <span class="star"></span>
+            <span class="star"></span>
+            <span class="star yellow"></span>
         </div>
+
         <div class="product__detail-price">
             <div class="product__detai-price-new">
                 <span class="product__detai-number-nameprice">Giảm: </span>
@@ -168,7 +166,59 @@ if (isset($_GET['id'])) {
                 </div>
                 <a class="show-more-btn">Xem thêm</a>
             </div>
+            <?php
+            if (isset($_SESSION['makh'])):
 
+                ?>
+                <!-- Phần bình luận -->
+                <div class="comments-section">
+                    <!-- Form bình luận -->
+                    <form id="comment-form" action="index.php?action=binhluan" method="post">
+                        <input type="hidden" name="mahh" value="<?php echo $id; ?>">
+                        <textarea name="comment" placeholder="Nhập bình luận của bạn" required></textarea>
+                        <button type="submit">Gửi</button>
+                    </form>
+                    <?php
+            endif;
+            ?>
+                <!-- Danh sách bình luận -->
+                <div class="comment-list">
+                    <!-- Bình luận mẫu -->
+                    <?php
+                    $bl = new binhluan();
+                    $noidung = $bl->selectBinhLuan($id);
+                    while ($set = $noidung->fetch()):
+                        ?>
+                        <div class="comment">
+                            <div class="comment-header">
+                                <span class="author">
+                                    <?php echo $set['tenkh'] ?>
+                                </span>
+                                <span class="timestamp">2 phút trước</span>
+                            </div>
+                            <p>
+                                <?php echo $set['content'] ?>
+                            </p>
+                        </div>
+                        <!-- Kết thúc bình luận mẫu -->
+                        <?php
+                    endwhile;
+                    ?>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+<script>
+    var stars = {
+        init: function () {
+            for (let docket of document.getElementsByClassName("psstar")) {
+                for (let star of docket.getElementsByTagName("span")) {
+                    star.addEventListener("click")
+                }
+            }
+        }
+    }
+    window.addEventListener('DOMContentLoaded', stars.init);
+</script>

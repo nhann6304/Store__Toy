@@ -159,7 +159,7 @@
                         </span>
 
                         <span class="pay__checkout-price">
-                            <?php echo number_format($set['dongia']) ?>đ
+                            <?php echo number_format($set['dongia'] - $set['giamgia']) ?> đ
 
                         </span>
                     </div>

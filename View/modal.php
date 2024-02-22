@@ -84,7 +84,8 @@
 
                     <div class="auth-form__aside">
                         <div class="auth-form__help">
-                            <a href="" class="auth-form__help-link auth-form__help-forgot ">Quên mật khẩu</a>
+                            <a href="index.php?action=forget" class="auth-form__help-link auth-form__help-forgot ">Quên
+                                mật khẩu</a>
                             <span class="auth__help-separete"></span>
                             <a href="" class="auth-form__help-link">Cần trợ giúp?</a>
                         </div>

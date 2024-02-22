@@ -1,9 +1,8 @@
 <?php
 // include_once "Model/connect.php";
 // include_once "Model/hanghoa.php";
-// session_destroy();
 session_start();
-// include_once "./Model/class.phpmailer.php";
+include_once "./Model/class.phpmailer.php";
 spl_autoload_register('myModelLoader');
 
 function myModelLoader($className)

@@ -149,7 +149,8 @@
 
 
         <!-- header width search -->
-        <div class="header-width-search">
+
+        <form class="header-width-search" action="index.php?action=hanghoa&act=timkiem" method="post">
             <div class="header__logo">
                 <div class="header__logo-img">
                     <a href="index.php" class="header__logo-link">
@@ -169,7 +170,9 @@
 
             <div class="header__search">
                 <div class="header__search-input-wrap">
-                    <input type="text" class="header__search-input" placeholder="Nhập để tìm kiến sản phẩm">
+
+                    <input type="text" name="txtsearch" class="header__search-input"
+                        placeholder="Nhập để tìm kiến sản phẩm">
                     <!-- search history -->
                     <div class="header__search-history">
                         <h3 class="header__search-history-heading">Lịch sử tìm kiếm</h3>
@@ -277,8 +280,8 @@
                     </div>
                 </div>
             </div>
+        </form>
 
-        </div>
         <!-- end nav bar -->
     </div>
 

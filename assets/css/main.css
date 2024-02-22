@@ -1587,7 +1587,7 @@ img {
     /* Sắp xếp phần tử này lên đầu */
 }
 
-.rating>input {
+/* .rating>input {
     display: none;
 }
 
@@ -1612,7 +1612,24 @@ img {
 .rating>label:hover~input:checked~label,
 .rating>input:checked~label:hover~label {
     color: grey;
+} */
+
+/* Màu mặc định cho tất cả các ngôi sao */
+.star {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: gray;
+    /* Màu xám */
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
 }
+
+/* Màu cho ngôi sao màu vàng */
+.star.yellow {
+    background-color: gold;
+    /* Màu vàng */
+}
+
 
 .product__detail-price {
     margin-bottom: 11px;
@@ -2368,4 +2385,214 @@ input:focus {
 .pay__checkout-sum_all-product-text {
     font-weight: 600;
     font-size: 20px;
+}
+
+/* forget password */
+
+
+.breadcrumbs__item {
+    list-style: none;
+    padding-left: 6px;
+}
+
+.breadcrumbs__item.home__link {
+    display: flex;
+    align-items: center;
+}
+
+.breadcrumbs__item.home__link a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+}
+
+.breadcrumbs__item.home__link a:hover {
+    text-decoration: underline;
+}
+
+.breadcrumbs__item.home__link-icon {
+    margin-left: 5px;
+    fill: #8F8F8F;
+}
+
+.breadcrumbs__item.home__link-icon svg {
+    width: 6px;
+    height: 10px;
+}
+
+
+.reset__container-banner {
+    width: 100%;
+    background-color: #ccc;
+    display: flex;
+    justify-content: flex-start;
+    padding: 0;
+}
+
+.home__link-icon {
+    margin-left: 1px;
+}
+
+.reset__container-resetpass {
+    height: 46px;
+}
+
+.breadcrumbs__link {
+    margin-left: 12px;
+}
+
+.breadcrumbs__list {
+    padding: 0;
+    display: flex;
+    margin: 0;
+    height: 100%;
+    line-height: 46px;
+
+}
+
+.reset_container-notification {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.breadcrumbs__item {
+    list-style: none;
+    padding-left: 6px;
+}
+
+.reset_container-title {
+    display: flex;
+    justify-content: center;
+}
+
+.reset_container-text {
+    font-size: 48px;
+    color: #041675;
+    margin: 0;
+    margin-top: 40px;
+}
+
+.reset_container-notification-text {
+    color: #111111;
+    font-size: 16px;
+}
+
+.reset_container-input-email {
+    display: block;
+    margin: 32px 0 8px 0;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 600;
+    color: #041675;
+}
+
+.reset__container-input-email {
+    height: 40px;
+    width: 354px;
+    border-radius: 15px;
+    border: 1px solid #ccc;
+}
+
+.reset__container-erro-email {
+    display: block;
+    margin-top: 6px;
+}
+
+.reset_container-input {
+    display: flex;
+    justify-content: center;
+}
+
+.reset_container-input-controll {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.reset_container-input-controll-btn {
+    width: 200px;
+    height: 50px;
+}
+
+.reset_container-input-controll-btn,
+.reset_container-input-controll-cancel {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 10px 20px;
+    text-decoration: none;
+    border: none;
+    background-color: #cf102d;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.reset_container-input-controll-cancel {
+    display: block;
+    margin-top: 10px;
+    color: #dc3545;
+    background-color: transparent;
+}
+
+
+
+.reset_container-input-controll-btn:focus,
+.reset_container-input-controll-cancel:focus {
+    outline: none;
+}
+
+/* comment */
+.comments-section {
+    margin-top: 20px;
+}
+
+#comment-form textarea {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#comment-form button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.comment-list .comment {
+    margin-bottom: 20px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+.comment-list .comment p {
+    margin: 0;
+    font-size: 16px;
+}
+
+.comment-list .comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.comment-list .comment-header .author {
+    font-weight: bold;
+    color: #333;
+}
+
+.comment-list .comment-header .timestamp {
+    color: #888;
+    font-size: 14px;
 }

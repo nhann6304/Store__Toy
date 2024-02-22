@@ -26,6 +26,23 @@ class user
         $result = $db->__getInstance($select);
         return $result;
     }
+
+    function checkEmail($email)
+    {
+        $db = new connect();
+        $select = "select * from khachhang a
+             WHERE a.email='$email'";
+        $result = $db->__getList($select);
+        return $result;
+    }
+
+    function updatePassEmail($email, $pass)
+    {
+        $db = new connect();
+        $query = "update khachhang set matkhau='$pass' where email ='$email'";
+        echo $query;
+        $db->exec($query);
+    }
 }
 
 

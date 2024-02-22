@@ -41,9 +41,16 @@ class hoadon
     function selectThongTinHHID($masohd)
     {
         $db = new connect();
-        $select = "select DISTINCT a.tenhh,b.hinh,b.dongia from hanghoa a, cthanghoa b, cthoadon c WHERE a.mahh=b.idhanghoa and a.mahh=c.mahh and c.sohoadon=$masohd";
+        $select = "select DISTINCT a.tenhh,b.hinh,b.dongia,b.giamgia from hanghoa a, cthanghoa b, cthoadon c WHERE a.mahh=b.idhanghoa and a.mahh=c.mahh and c.sohoadon=$masohd";
         $result = $db->__getList($select);
         return $result;
+    }
+
+    function updateSoLuongTon($mahh, $soluongmua)
+    {
+        $db = new connect();
+        $query = "update cthanghoa set soluongton=soluongton-$soluongmua WHERE idhanghoa=$mahh;";
+        $db->exec($query);
     }
 }
 

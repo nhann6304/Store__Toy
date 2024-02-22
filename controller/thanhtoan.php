@@ -7,7 +7,7 @@ if (isset($_SESSION['makh'])) {
     $total = 0;
     foreach ($_SESSION['cart'] as $key => $item) {
         $hd->insertCTHoadon($sohd, $item['mahh'], $item['soluong'], $item['quocgia'], $item['thanhtien']);
-        // $hd->updateSoLuongTon($item['mahh'], $item['soluong']);
+        $hd->updateSoLuongTon($item['mahh'], $item['soluong']);
         $total += $item['thanhtien'];
         // hàm cập nhật số lượng tồn khi mua hàng
 

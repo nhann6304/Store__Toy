@@ -45,6 +45,15 @@ class hanghoa
         return $result;
     }
 
+    function getHangHoaAllPage($start, $limit)
+    {
+
+        $db = new connect();
+        $select = "SELECT DISTINCT a.mahh, a.tenhh, b.dongia, b.soluongton, b.giamgia, b.hinh, b.percent, c.tenquocgia, d.maloai, d.maloai, d.iploai FROM hanghoa a, cthanghoa b, quocgia c, loai d WHERE a.mahh = b.idhanghoa and b.idquocgia = c.idquocgia and a.maloai = d.maloai ORDER BY `a`.`mahh` ASC LIMIT " . $start . "," . $limit;
+        $result = $db->__getList($select);
+        return $result;
+    }
+
     function getHangHoaNew()
     {
         $db = new connect();
@@ -68,6 +77,26 @@ class hanghoa
         $result = $db->__getInstance($select);
         return $result;
     }
+
+    function getCountHangHoaAll()
+    {
+        $db = new connect();
+        $select = "SELECT COUNT(a.mahh)  FROM hanghoa a, cthanghoa b WHERE a.mahh = b.idhanghoa ORDER BY a.mahh DESC";
+        $result = $db->__getInstance($select);
+        return $result[0];
+    }
+
+    function selectTimKiem($tensp, $start, $limit)
+    {
+        $db = new connect();
+        $select = "SELECT a.mahh,a.ngaydang, a.tenhh, b.dongia, b.dongia, b.soluongton, b.giamgia, b.hinh, b.percent, c.tenquocgia, d.maloai, d.maloai, d.iploai
+        FROM hanghoa a, cthanghoa b, quocgia c, loai d
+        WHERE a.mahh = b.idhanghoa and  b.idquocgia = c.idquocgia AND a.maloai = d.maloai AND  a.tenhh like '%$tensp%' ORDER BY a.mahh DESC LIMIT  " . $start . "," . $limit;
+        $result = $db->__getList($select);
+        return $result;
+    }
+
+
 
 }
 

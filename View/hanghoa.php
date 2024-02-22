@@ -1,16 +1,23 @@
 <?php
-// Phân trang
-?>
+$hh = new hanghoa();
+$count = $hh->getCountHangHoaAll();
+$trang = new page();
+$limit = 10;
+$page = $trang->findPage($count, $limit);
+$start = $trang->findStart($limit);
 
+?>
 <?php
 $ac = 1;
 if (isset($_GET['action'])) {
-    if (isset($_GET['act']) && $_GET['act'] == 'productAll') {
+    if (isset($_GET['act']) && $_GET['act'] == 'productAll' || isset($_GET['page'])) {
         $ac = 2;
-    } else if (isset($_GET['act']) && $_GET['act'] == 'productNew') {
+    } else if (isset($_GET['act']) && $_GET['act'] == 'productNew' || isset($_GET['page'])) {
         $ac = 3;
-    } else if (isset($_GET['act']) && $_GET['act'] == 'productSale') {
+    } else if (isset($_GET['act']) && $_GET['act'] == 'productSale' || isset($_GET['page'])) {
         $ac = 4;
+    } else if (isset($_GET['act']) && $_GET['act'] == 'timkiem' || isset($_GET['page'])) {
+        $ac = 5;
     } else {
         $ac = 1;
     }
@@ -104,11 +111,16 @@ if (isset($_GET['action'])) {
                             $result = $hh->getHangHoaNew();
                         } else if ($ac == 4) {
                             $result = $hh->getHangHoaSale();
+                        } else if ($ac == 5) {
+                            if (isset($_POST['txtsearch'])) {
+                                $tk = $_POST['txtsearch'];
+                                $result = $hh->selectTimKiem($tk, $start, $limit);
+                            }
                         } else {
-                            $result = $hh->getHangHoaAll();
+                            // $result = $hh->getHangHoaAll();
+                            $result = $hh->getHangHoaAllPage($start, $limit);
                         }
-                        // $result = $hh->getHangHoaSale();
-                        
+
                         while ($set = $result->fetch()):
                             ?>
                             <div class="grid__column-2-4 tab-content <?php echo $set['iploai'] ?>">
@@ -179,37 +191,40 @@ if (isset($_GET['action'])) {
 
             <!-- Phân trang pagination -->
             <ul class="pagination home-product__pagination">
-                <li href="" class="pagination-item ">
-                    <a href="" class="pagination-item__link">
-                        <i class="pagination-item__icon fa-solid fa-angle-left"></i>
-                    </a>
-                </li>
+                <?php
+                $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+                ?>
 
-                <li href="" class="pagination-item ">
-                    <a href="" class="pagination-item__link">1</a>
-                </li>
-                <li href="" class="pagination-item">
-                    <a href="" class="pagination-item__link">2</a>
-                </li>
-                <li href="" class="pagination-item">
-                    <a href="" class="pagination-item__link">3</a>
-                </li>
-                <li href="" class="pagination-item">
-                    <a href="" class="pagination-item__link">4</a>
-                </li>
-                <li href="" class="pagination-item">
-                    <a href="" class="pagination-item__link">...</a>
-                </li>
-                <li href="" class="pagination-item">
-                    <a href="" class="pagination-item__link">10</a>
-                </li>
-                <li href="" class="pagination-item">
-                    <a href="" class="pagination-item__link">
-                        <i class="pagination-item__icon fa-solid fa-angle-right"></i>
-                    </a>
-                </li>
+                <?php
+                if ($current_page > 1 && $page > 1):
+                    ?>
+                    <li class="pagination-item ">
+                        <a href="index.php?action=hanghoa&page=<?php echo ($current_page - 1) ?> "
+                            class="pagination-item__link">
+                            <i class="pagination-item__icon fa-solid fa-angle-left"></i>
+                        </a>
+                    </li>
+                <?php endif ?>
+
+                <?php
+                for ($i = 1; $i <= $page; $i++) {
+                    $activeClass = ($i == $current_page) ? "pagination-item--active" : '';
+                    echo '
+                        <li href="" class="pagination-item ' . $activeClass . '  ">
+                             <a href="index.php?action=hanghoa&page=' . $i . '" class="pagination-item__link">' . $i . '</a>
+                        </li>';
+                }
+
+                if ($current_page < $page && $page > 1):
+                    ?>
+                    <li class="pagination-item ">
+                        <a href="index.php?action=hanghoa&page=<?php echo ($current_page + 1) ?> "
+                            class="pagination-item__link">
+                            <i class="pagination-item__icon fa-solid fa-angle-right"></i>
+                        </a>
+                    </li>
+                <?php endif ?>
             </ul>
         </div>
     </div>
-</div>
 </div>
